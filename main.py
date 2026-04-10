@@ -713,7 +713,7 @@ async def execute_order(request: Request, execute_req: ExecuteRequest):
             position_qty = position.qty if position else Decimal("0")
 
             sl_set = False
-            if request.trailing_stop_distance:
+            if request.trailing_stop_distance is not None:
                 if not position:
                     # 포지션이 이미 소멸 — SL 발동 등으로 청산됨, position-closed 콜백이 곧 전송될 것
                     logger.info(f"[adjust] position already gone, skipping trailing stop: {symbol}")
